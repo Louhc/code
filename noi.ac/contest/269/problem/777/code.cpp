@@ -23,9 +23,6 @@ signed main(){
 		m[i] = t.substr(0, 50), l[i] += 'U';
 	} sort( p + 1, p + N + 1, cmp );
 	fp( i, 1, N ){
-		cerr << m[p[i]] << " " << l[p[i]] << endl;
-	}
-	fp( i, 1, N ){
 		string t(ans); ans = 'U';
 		fp( j, 1, s[p[i]].size() ) cmin( ans, s[p[i]].substr(0, j) + t );
 	} cout << ans + '\n';
