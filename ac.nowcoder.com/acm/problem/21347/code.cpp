@@ -8,19 +8,9 @@ using namespace std;
 #define go( i, b ) for ( int i(b), v(to[i]); i; v = to[i = nxt[i]] )
 template<typename T> inline bool cmax( T &x, T y ){ return x < y ? x = y, 1 : 0; }
 template<typename T> inline bool cmin( T &x, T y ){ return y < x ? x = y, 1 : 0; }
-//#define getchar() ( p1 == p2 && ( p1 = bf, p2 = bf + fread( bf, 1, 1 << 21, stdin ), p1 == p2 ) ? EOF : *p1++ )
-char bf[1 << 21], *p1(bf), *p2(bf);
-template<typename T>
-inline void read( T &x ){ char t(getchar()), flg(0); x = 0;
-	for ( ; !isdigit(t); t = getchar() ) flg = t == '-';
-	for ( ; isdigit(t); t = getchar() ) x = x * 10 + ( t & 15 );
-	flg ? x = -x : x;
-}
-
-int N, M;
 
 signed main(){
-	read(N), read(M);
+	unsigned long long n = 64;
+	printf( "%llu %llu %llu %llu\n", 1ull << n, 1ull << 64ull, 2ull << (n - 1), 4ull << (n - 2) );
 	return 0;
 }
-
