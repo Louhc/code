@@ -14,7 +14,7 @@ template<class T> inline void read( T &x ){
     flg ? x = -x : x;
 }
 
-const int _ = 131072;
+const int _ = 1<<20;
 int N, M, n;
 int a[_];
 i64 A[_], B[_];
@@ -37,6 +37,6 @@ int main(){
 	fp( i, 0, n - 1 ) A[i] *= B[i];
 	FWT(A, 1); i64 ans = 1e18;
 	fp( i, 0, n - 1 ) cmin(ans, A[i]);
-	printf( "%lld\n", ans );
+	cout << ans << endl;
 	return 0;
 }
