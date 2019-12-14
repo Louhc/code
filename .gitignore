@@ -1,2 +1,9 @@
 
 *.exe
+input
+output
+*.in
+*.out
+*.ans
+std.cpp
+
