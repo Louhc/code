@@ -623,13 +623,15 @@ int failed = 0;
 void process(int id, double result) {
 	printf("Solution #%d: ", id);
 	if (result < -0.5) {
-		printf("%s\n", "produced an incorrect answer (success).");
-		failed++;
+		;
+//		printf("%s\n", "produced an incorrect answer (success).");
+//		failed++;
 	}
 	else {
-		if (result < 0) result = 0;
-		if (result > 1) result = 1;
-		printf("produced a correct answer using %6.2f%% of the time limit (failure).\n", 100 * result);
+		exit(0);
+//		if (result < 0) result = 0;
+//		if (result > 1) result = 1;
+//		printf("produced a correct answer using %6.2f%% of the time limit (failure).\n", 100 * result);
 	}
 }
 
@@ -671,21 +673,25 @@ int main() {
 	CorrectSolution sol;
 	int correct = sol.solve();
 	
-	Solution1 sol1;
-	process(1, sol1.solve(correct));
-	
-	Solution2 sol2;
-	process(2, sol2.solve(correct));
+//	Solution1 sol1;
+//	process(1, sol1.solve(correct));
+//	
+//	Solution2 sol2;
+//	process(2, sol2.solve(correct));
 	
 	Solution3 sol3;
 	process(3, sol3.solve(correct));
 	
-	Solution4 sol4;
-	process(4, sol4.solve(correct));
+//	Solution4 sol4;
+//	process(4, sol4.solve(correct));
 	
-	int score = 21 * failed;
-	if (failed > 0) score += 2400 / (m < 100 ? 100 : m) - 8;
-	printf("\nScore: %d points.\n", score);
+	return 1;
+	
+//	int score = 21 * failed;
+//	if (failed > 0) score += 2400 / (m < 100 ? 100 : m) - 8;
+//	printf("\nScore: %d points.\n", score);
+	
+//	if ( failed >= 4 ) return 1;
 	
 	return 0;
 }

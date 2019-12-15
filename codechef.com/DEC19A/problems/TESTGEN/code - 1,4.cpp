@@ -17,8 +17,7 @@ inline void read( T &x ){ char t(getchar()), flg(0); x = 0;
 	flg ? x = -x : x;
 }
 
-
-int N = 200, M = 300;
+int N = 205, M = 300;
 set<pair<int, int> > S;
 
 struct edge{
@@ -26,36 +25,8 @@ struct edge{
 	bool operator < ( const edge &t )const{ return y == t.y ? x < t.x : y < t.y; }
 	edge( int a = 0, int b = 0 ){
 		x = a, y = b;
-		if ( x > y ) swap(x, y);
 	}
 };
-
-struct random_t {
-	unsigned state;
-	random_t() : state(0) { }
-	random_t( unsigned seed ) : state(seed) { }
-	unsigned next() {
-		state ^= state << 13;
-		state ^= state >> 17;
-		state ^= state << 5;
-		return state;
-	}
-	void permute(int* permutation, int n) {
-		for (int k = 1; k <= n; k++) {
-			permutation[k] = k;
-			int p = next() % k + 1;
-			int tmp = permutation[p];
-			permutation[p] = k;
-			permutation[k] = tmp;
-		}
-	}
-	void sh( edge *a, int n ){
-		for ( int i = 1; i <= n; ++i ){
-			int t(next() % i + 1);
-			swap(a[t], a[i]);
-		}
-	}
-}rnd;
 
 struct G{
 	int n;
@@ -68,7 +39,7 @@ struct G{
 		S.insert(edge(x, y));
 		return 1;
 	}
-	void rs( int l, int r ){ rnd.sh(e + l - 1, r - l + 1); }
+	void rs(){ random_shuffle(e + 1, e + n + 1); }
 	void print(){
 		fp( i, 1, n ){
 			printf( "%d %d\n", e[i].x, e[i].y );
@@ -76,35 +47,18 @@ struct G{
 	}
 }g1, g2;
 
-int Get(){
-	int x;
-	ifstream fin("seed.txt");
-	fin >> x;
-	return x;
-}
-void Put( int x ){
-	ofstream fout("seed.txt");
-	fout << x;
-}
-
 signed main(){
-//	freopen( "input.txt", "w", stdout );
-	int seed; rnd = random_t(seed = Get()), Put(seed + 1);
-	
+	srand(12345679);
+	freopen( "input.txt", "w", stdout );
 	printf( "%d %d\n", N, M );
-	fp( i, 2, N ) g1.ins(rnd.next() % (i - 1) + 1, i);
-	fp( i, 2, N ) g2.ins(rnd.next() % (i - 1) + 1, i);
-	fp( i, N, M ) while( !g1.ins(rnd.next() % N + 1, rnd.next() % N + 1) );
-	fp( i, N, M ) while( !g2.ins(rnd.next() % N + 1, rnd.next() % N + 1) );
-	
-	g1.rs(1, M);
-	
-	g1.print();
-	printf("\n");
-	g2.print();
-	
-	cerr << seed;
-	
+	fp( i, 2, N ) g1.ins(i, rand() % (i - 1) + 1);
+	fp( i, 1, N - 1 ) g2.ins(i, N - rand() % (N - i));	
+	fp( i, 1, M - N + 1 ){
+		while( !g1.ins(rand() % N + 1, rand() % N + 1));
+		while( !g2.ins(rand() % N + 1, rand() % N + 1));
+	}
+	g1.rs(), g2.rs();
+	g1.print(), g2.print();
 	return 0;
 }
 
