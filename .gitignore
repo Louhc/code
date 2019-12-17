@@ -1,9 +1,10 @@
-
 *.exe
+code
+!code/
+std.cpp
+
 input
 output
 *.in
 *.out
 *.ans
-std.cpp
-
