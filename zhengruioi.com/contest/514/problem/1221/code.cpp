@@ -13,6 +13,14 @@ const u32 _ = 3e5 + 55;
 int N, Q, fa[_], sn[_], tp[_], sg[_], num;
 int hd[_], nxt[_], to[_], tot; 
 u32 w[_], d[_], d1[_], d2[_], sz[_], r[_], f[_], c[_];
+/*
+d 增加的权值
+d1 x的儿子数
+d2 x的孙子数
+sz x的大小
+r x的答案(不包括某些贡献
+f 儿子节点 sz[y] * d1[y] 之和
+*/
 inline void addedge( int x, int y ){
 	nxt[++tot] = hd[x], hd[x] = tot, to[tot] = y;
 }
@@ -51,7 +59,9 @@ signed main(){
 			Add(x, y);
 		} else {
 			u32 ans(r[x] + d[fa[fa[x]]] * (sz[x] + 1) + d[fa[x]] * (d1[x] * sz[x] + 2));
-			if ( sn[x] ) ans += (Get(sg[x] + sz[x] - 1) - Get(sg[x])) * (1 + d1[x] + d2[x]) * (sz[x] - sz[sn[x]]);
+			// 原有的贡献 + 爷爷的贡献 + 爸爸的贡献
+			if ( sn[x] ) ans += (Get(sg[sn[x]] + sz[sn[x]] - 1) - Get(sg[sn[x]])) * (1 + d1[x] + d2[x]) * (sz[x] - sz[sn[x]]);
+			// 重儿子子树内的贡献
 			cout << ans << endl;
 		}
 	}
