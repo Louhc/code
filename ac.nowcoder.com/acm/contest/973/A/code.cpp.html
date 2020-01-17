@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>code.cpp</title>
+<link rel="stylesheet" type="text/css" href="highlight.css">
+</head>
+<body class="hl">
+<pre class="hl"><span class="hl ppc">#include&lt;bits/stdc++.h&gt;</span>
+<span class="hl kwa">using namespace</span> std<span class="hl opt">;</span>
+<span class="hl ppc">#define i64 long long</span>
+<span class="hl ppc">#define fp( i, b, e ) for ( int i(b), I(e); i &lt;= I; ++i )</span>
+<span class="hl ppc">#define fd( i, b, e ) for ( int i(b), I(e); i &gt;= I; --i )</span>
+<span class="hl ppc">#define go( i, b ) for ( int i(b), v(to[i]); i; v = to[i = nxt[i]] )</span>
+<span class="hl kwc">template</span><span class="hl opt">&lt;</span>typename T<span class="hl opt">&gt;</span> <span class="hl kwc">inline</span> <span class="hl kwb">void</span> <span class="hl kwd">cmax</span><span class="hl opt">(</span> T <span class="hl opt">&amp;</span>x<span class="hl opt">,</span> T y <span class="hl opt">){</span> x <span class="hl opt">&lt;</span> y <span class="hl opt">?</span> x <span class="hl opt">=</span> y <span class="hl opt">:</span> x<span class="hl opt">; }</span>
+<span class="hl kwc">template</span><span class="hl opt">&lt;</span>typename T<span class="hl opt">&gt;</span> <span class="hl kwc">inline</span> <span class="hl kwb">void</span> <span class="hl kwd">cmin</span><span class="hl opt">(</span> T <span class="hl opt">&amp;</span>x<span class="hl opt">,</span> T y <span class="hl opt">){</span> y <span class="hl opt">&lt;</span> x <span class="hl opt">?</span> x <span class="hl opt">=</span> y <span class="hl opt">:</span> x<span class="hl opt">; }</span>
+
+<span class="hl kwb">clock_t</span> t_bg<span class="hl opt">,</span> t_ed<span class="hl opt">;</span>
+<span class="hl kwb">int</span> K<span class="hl opt">,</span> B<span class="hl opt">,</span> X<span class="hl opt">,</span> Y<span class="hl opt">,</span> w<span class="hl opt">[</span><span class="hl num">50</span><span class="hl opt">],</span> n<span class="hl opt">,</span> ans<span class="hl opt">;</span>
+<span class="hl kwb">int</span> f<span class="hl opt">[</span><span class="hl num">50</span><span class="hl opt">][</span><span class="hl num">50</span><span class="hl opt">];</span>
+
+<span class="hl kwb">int</span> <span class="hl kwd">calc</span><span class="hl opt">(</span> <span class="hl kwb">int</span> x <span class="hl opt">){</span>
+	n <span class="hl opt">=</span> <span class="hl num">0</span><span class="hl opt">;</span> <span class="hl kwa">while</span><span class="hl opt">(</span> x <span class="hl opt">)</span> w<span class="hl opt">[++</span>n<span class="hl opt">] =</span> x <span class="hl opt">%</span> B<span class="hl opt">,</span> x <span class="hl opt">/=</span> B<span class="hl opt">;</span>
+	<span class="hl kwb">int</span> <span class="hl kwd">ans</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">),</span> <span class="hl kwd">c</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">);</span>
+	<span class="hl kwd">fd</span><span class="hl opt">(</span> i<span class="hl opt">,</span> n<span class="hl opt">,</span> <span class="hl num">1</span> <span class="hl opt">){</span>
+		<span class="hl kwa">if</span> <span class="hl opt">(</span> w<span class="hl opt">[</span>i<span class="hl opt">] ==</span> <span class="hl num">1</span> <span class="hl opt">){</span>
+			ans <span class="hl opt">+=</span> f<span class="hl opt">[</span>i <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl opt">][</span>K <span class="hl opt">-</span> c<span class="hl opt">];</span>
+			<span class="hl kwa">if</span> <span class="hl opt">( ++</span>c <span class="hl opt">&gt;</span> K <span class="hl opt">)</span> <span class="hl kwa">return</span> ans<span class="hl opt">;</span>
+		<span class="hl opt">}</span> <span class="hl kwa">else if</span> <span class="hl opt">(</span> w<span class="hl opt">[</span>i<span class="hl opt">] &gt;</span> <span class="hl num">1</span> <span class="hl opt">)</span>
+			<span class="hl kwa">return</span> ans <span class="hl opt">+=</span> f<span class="hl opt">[</span>i<span class="hl opt">][</span>K <span class="hl opt">-</span> c<span class="hl opt">];</span>
+	<span class="hl opt">}</span> <span class="hl kwa">return</span> ans <span class="hl opt">+ (</span> c <span class="hl opt">==</span> K <span class="hl opt">);</span>
+<span class="hl opt">}</span>
+
+<span class="hl kwb">signed</span> <span class="hl kwd">main</span><span class="hl opt">(){</span>
+	t_bg <span class="hl opt">=</span> <span class="hl kwd">clock</span><span class="hl opt">();</span>
+	<span class="hl kwd">scanf</span><span class="hl opt">(</span> <span class="hl str">&quot;%d%d%d%d&quot;</span><span class="hl opt">, &amp;</span>X<span class="hl opt">, &amp;</span>Y<span class="hl opt">, &amp;</span>K<span class="hl opt">, &amp;</span>B <span class="hl opt">);</span>
+	f<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">][</span><span class="hl num">0</span><span class="hl opt">] =</span> <span class="hl num">1</span><span class="hl opt">;</span>
+	<span class="hl kwd">fp</span><span class="hl opt">(</span> i<span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">30</span> <span class="hl opt">){</span>
+		f<span class="hl opt">[</span>i<span class="hl opt">][</span><span class="hl num">0</span><span class="hl opt">] =</span> <span class="hl num">1</span><span class="hl opt">;</span>
+		<span class="hl kwd">fp</span><span class="hl opt">(</span> j<span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">30</span> <span class="hl opt">)</span> f<span class="hl opt">[</span>i<span class="hl opt">][</span>j<span class="hl opt">] =</span> f<span class="hl opt">[</span>i <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl opt">][</span>j<span class="hl opt">] +</span> f<span class="hl opt">[</span>i <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl opt">][</span>j <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl opt">];</span>
+	<span class="hl opt">}</span> <span class="hl kwd">printf</span><span class="hl opt">(</span> <span class="hl str">&quot;%d</span><span class="hl esc">\n</span><span class="hl str">&quot;</span><span class="hl opt">,</span> <span class="hl kwd">calc</span><span class="hl opt">(</span>Y<span class="hl opt">) -</span> <span class="hl kwd">calc</span><span class="hl opt">(</span>X <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl opt">) );</span>
+	t_ed <span class="hl opt">=</span> <span class="hl kwd">clock</span><span class="hl opt">();</span>
+	<span class="hl kwd">fprintf</span><span class="hl opt">(</span> stderr<span class="hl opt">,</span> <span class="hl str">&quot;</span><span class="hl esc">\n</span><span class="hl str">========info========</span><span class="hl esc">\n</span><span class="hl str">time : %.3f</span><span class="hl esc">\n</span><span class="hl str">====================</span><span class="hl esc">\n</span><span class="hl str">&quot;</span><span class="hl opt">, (</span><span class="hl kwb">double</span><span class="hl opt">)(</span> t_ed <span class="hl opt">-</span> t_bg <span class="hl opt">) /</span> CLOCKS_PER_SEC <span class="hl opt">);</span>
+	<span class="hl kwa">return</span> <span class="hl num">0</span><span class="hl opt">;</span>
+<span class="hl opt">}</span>
+
+</pre>
+</body>
+</html>
+<!--HTML generated by highlight 3.54.1, http://www.andre-simon.de/-->
