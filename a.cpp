@@ -9,6 +9,6 @@ template<typename T> inline void cmax( T &x, T y ){ x < y ? x = y : x; }
 template<typename T> inline void cmin( T &x, T y ){ y < x ? x = y : x; }
 
 int main(){
-	ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+	ios::sync_with_stdio(0), cin.tie(0);
 	return 0;
 }
