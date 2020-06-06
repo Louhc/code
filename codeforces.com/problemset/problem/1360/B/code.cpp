@@ -8,6 +8,17 @@ using namespace std;
 template<typename T> inline bool cmax( T &x, T y ){ return x < y ? x = y, 1 : 0; }
 template<typename T> inline bool cmin( T &x, T y ){ return y < x ? x = y, 1 : 0; }
 
+int T, N, a[100], ans;
+
 int main(){
+	ios::sync_with_stdio(0), cin.tie(0);
+	cin >> T;
+	while( T-- ){
+		cin >> N; ans = 1e9;
+		fp( i, 1, N ) cin >> a[i];
+		sort(a + 1, a + N + 1);
+		fp( i, 1, N - 1 ) cmin(ans, a[i + 1] - a[i]);
+		printf( "%d\n", ans );
+	}
 	return 0;
 }

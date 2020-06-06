@@ -8,6 +8,10 @@ using namespace std;
 template<typename T> inline bool cmax( T &x, T y ){ return x < y ? x = y, 1 : 0; }
 template<typename T> inline bool cmin( T &x, T y ){ return y < x ? x = y, 1 : 0; }
 
+int T, N;
+
 int main(){
+	scanf( "%d", &T );
+	while( T-- ) scanf( "%d", &N ), printf( "%d\n", N );
 	return 0;
 }

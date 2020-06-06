@@ -8,6 +8,15 @@ using namespace std;
 template<typename T> inline bool cmax( T &x, T y ){ return x < y ? x = y, 1 : 0; }
 template<typename T> inline bool cmin( T &x, T y ){ return y < x ? x = y, 1 : 0; }
 
+int T, a, b;
+int sqr( int x ){ return x * x; }
+
 int main(){
+	ios::sync_with_stdio(0), cin.tie(0);
+	cin >> T;
+	while( T-- ){
+		cin >> a >> b;
+		cout << min( sqr(max(a << 1, b)), sqr(max(a, b << 1)) ) << endl;
+	}
 	return 0;
 }
