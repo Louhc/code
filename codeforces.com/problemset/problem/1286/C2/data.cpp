@@ -7,6 +7,12 @@ using namespace std;
 template<typename T> inline bool cmax( T &x, T y ){ return x < y ? x = y, 1 : 0; }
 template<typename T> inline bool cmin( T &x, T y ){ return y < x ? x = y, 1 : 0; }
 
+string s = "xasdungo";
+
 int main(){
+	cout << s.size() << endl;
+	fp( i, 0, 3 ) fp( j, i, 3 ) cout << s.substr(i, j - i + 1) << endl;
+	fp( i, 1, 3 ) fp( j, i, 3 ) cout << s.substr(i, j - i + 1) << endl;
+	fp( i, 0, 7 ) fp( j, i, 7 ) cout << s.substr(i, j - i + 1) << endl;
 	return 0;
 }
